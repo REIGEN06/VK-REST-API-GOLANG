@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  vk-rest-api:
+    container_name: vk-rest-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:${PORT}"
+    restart: always
+    depends_on:
+      - postgres-database
+    environment:
+      - DB_PASSWORD=password
+
+  postgres-database:
+    container_name: postgres-db
+    image: postgres:latest
+    volumes:
+    - ./.database/postgres/data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
