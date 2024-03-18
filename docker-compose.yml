@@ -23,4 +23,5 @@ services:
       - "5432:5432"
     restart: always
     environment:
+      - POSTGRES_DB=film-library
       - POSTGRES_PASSWORD=password
