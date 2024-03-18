@@ -22,11 +22,7 @@ import (
 func (h *Handler) CreateMovie(w http.ResponseWriter, r *http.Request) {
 	// @TODO: duplicate code, move it to a separate function
 	body := make([]byte, r.ContentLength)
-	_, err := r.Body.Read(body)
-	if err != nil {
-		newErrorResponse(w, h.logger, http.StatusBadRequest, "invalid input body", err)
-		return
-	}
+	r.Body.Read(body)
 
 	// @TODO: duplicate code, move it to a separate function
 	var movie models.Movie
@@ -36,7 +32,7 @@ func (h *Handler) CreateMovie(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusCreated)
-	_, err = w.Write([]byte("OK"))
+	_, err := w.Write([]byte("OK"))
 	if err != nil {
 		newErrorResponse(w, h.logger, http.StatusInternalServerError, "failed to write response", err)
 		return
