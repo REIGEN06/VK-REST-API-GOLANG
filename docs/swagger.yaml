@@ -2,7 +2,7 @@ basePath: /
 definitions:
   models.Actor:
     properties:
-      birthDate:
+      birth_date:
         type: string
       id:
         type: integer
@@ -29,7 +29,7 @@ definitions:
         type: string
       rating:
         type: integer
-      releaseDate:
+      release-date:
         type: string
     type: object
 host: localhost:4005
@@ -97,6 +97,12 @@ paths:
         name: id
         required: true
         type: integer
+      - description: actor info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.Actor'
       produces:
       - application/json
       responses:
@@ -259,9 +265,4 @@ paths:
       summary: search with sort (default = DESC)
       tags:
       - movie
-securityDefinitions:
-  ApiKeyAuth:
-    in: header
-    name: Authorization
-    type: apiKey
 swagger: "2.0"

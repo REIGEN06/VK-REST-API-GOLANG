@@ -78,6 +78,7 @@ func (h *Handler) GetAllActorsWithMovies(w http.ResponseWriter, r *http.Request)
 // @Accept json
 // @Produce  json
 // @Param id path int true "actor id"
+// @Param input body models.Actor true "actor info"
 // @Success 200 "OK"
 // @Failure 400
 // @Failure 500

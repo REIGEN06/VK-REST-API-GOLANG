@@ -104,6 +104,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "actor info",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Actor"
+                        }
                     }
                 ],
                 "responses": {
@@ -350,7 +359,7 @@ const docTemplate = `{
         "models.Actor": {
             "type": "object",
             "properties": {
-                "birthDate": {
+                "birth_date": {
                     "type": "string"
                 },
                 "id": {
@@ -391,17 +400,10 @@ const docTemplate = `{
                 "rating": {
                     "type": "integer"
                 },
-                "releaseDate": {
+                "release-date": {
                     "type": "string"
                 }
             }
-        }
-    },
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
         }
     }
 }`
