@@ -1,0 +1,267 @@
+basePath: /
+definitions:
+  models.Actor:
+    properties:
+      birthDate:
+        type: string
+      id:
+        type: integer
+      movies:
+        items:
+          $ref: '#/definitions/models.Movie'
+        type: array
+      name:
+        type: string
+      sex:
+        type: string
+    type: object
+  models.Movie:
+    properties:
+      actors:
+        items:
+          $ref: '#/definitions/models.Actor'
+        type: array
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      rating:
+        type: integer
+      releaseDate:
+        type: string
+    type: object
+host: localhost:4005
+info:
+  contact: {}
+  description: API Server for VK-REST-API Application
+  title: VK-REST-API API
+  version: "1.0"
+paths:
+  /api/actor:
+    post:
+      consumes:
+      - application/json
+      description: create actor
+      operationId: create-actor
+      parameters:
+      - description: actor info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.Actor'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Create actor
+      tags:
+      - actor
+  /api/actor/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete actors
+      operationId: delete-actors
+      parameters:
+      - description: actor id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+      summary: Delete actor
+      tags:
+      - actor
+    put:
+      consumes:
+      - application/json
+      description: update actor
+      operationId: update-actor
+      parameters:
+      - description: actor id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Update actor
+      tags:
+      - actor
+  /api/actor/all:
+    get:
+      consumes:
+      - application/json
+      description: get actors
+      operationId: get-actors
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Actor'
+            type: array
+        "500":
+          description: Internal Server Error
+      summary: Get actors
+      tags:
+      - actor
+  /api/movie:
+    post:
+      consumes:
+      - application/json
+      description: create movie
+      operationId: create-movie
+      parameters:
+      - description: movie info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.Movie'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Create movie
+      tags:
+      - movie
+  /api/movie/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete movies
+      operationId: delete-movies
+      parameters:
+      - description: movie id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+      summary: Delete movie
+      tags:
+      - movie
+    put:
+      consumes:
+      - application/json
+      description: update movie
+      operationId: update-movie
+      parameters:
+      - description: movie id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Update movie
+      tags:
+      - movie
+  /api/movie/all/{actor_name}:
+    get:
+      consumes:
+      - application/json
+      description: 'get movies: search by fragment of an actor''s name'
+      operationId: get-movies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Movie'
+            type: array
+        "500":
+          description: Internal Server Error
+      summary: Search by fragment of an actor's name
+      tags:
+      - movie
+  /api/movie/all/{movie_name}:
+    get:
+      consumes:
+      - application/json
+      description: 'get movies: search by fragment of a movie''s name'
+      operationId: get-movies-movie-name
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Movie'
+            type: array
+        "500":
+          description: Internal Server Error
+      summary: Search by fragment of a movie's name
+      tags:
+      - movie
+  /api/movie/all/{sort_by}:
+    get:
+      consumes:
+      - application/json
+      description: 'get movies: with sort (default = DESC)'
+      operationId: get-movies-sortby
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Movie'
+            type: array
+        "500":
+          description: Internal Server Error
+      summary: search with sort (default = DESC)
+      tags:
+      - movie
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

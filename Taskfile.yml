@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+  run:
+    cmds:
+      - cmd: go run ./cmd/film-library/main.go
+        silent: true
+  swag:
+    cmds:
+      - cmd: swag init -g ./cmd/film-library/main.go
